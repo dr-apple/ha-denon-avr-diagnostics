@@ -13,7 +13,7 @@ from .coordinator import DenonAvrDiagnosticsCoordinator
 
 type DenonAvrDiagnosticsConfigEntry = ConfigEntry[DenonAvrDiagnosticsCoordinator]
 
-PLATFORMS: list[Platform] = [Platform.SENSOR]
+PLATFORMS: list[Platform] = [Platform.BINARY_SENSOR, Platform.SENSOR]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: DenonAvrDiagnosticsConfigEntry) -> bool:

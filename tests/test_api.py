@@ -71,6 +71,20 @@ def test_video_parser_short_resolution() -> None:
 
 def test_channel_layout() -> None:
     assert channel_layout(["FL", "FR", "C", "SL", "SR", "SW", "TML", "TMR"]) == "5.1.2"
+    assert channel_layout(["FL", "FR", "LFE"]) == "2.1"
+
+
+def test_input_parser_ignores_control_zero_channels() -> None:
+    snapshot = parse_detail_response(
+        b"""<rx><cmd><name>GetInputSignal</name><list>
+        <param name="inputsiga1" control="2">FL</param>
+        <param name="inputsigb1" control="2">FR</param>
+        <param name="inputsigc1" control="2">LFE</param>
+        <param name="inputsigc2" control="0">C</param>
+        </list></cmd></rx>"""
+    )
+    assert snapshot.values["input_channels"] == "2.1"
+    assert snapshot.attributes["input_channels"]["channels"] == ["FL", "FR", "LFE"]
 
 
 def test_normalize_ipv6_host() -> None:
