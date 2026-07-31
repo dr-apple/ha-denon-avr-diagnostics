@@ -18,8 +18,10 @@ Depending on what the receiver and current source report:
 
 - Audio input mode, input codec/format, decoded output format and active sound mode
 - Sampling rate and bitrate when the receiver provides them
-- Input channel layout and a full channel list
-- Configured speakers and currently active output channels
+- Input channel layout plus separate on/off entities for FL, FR, C, LFE,
+  surround, back, wide and height channels
+- Configured speakers and currently active output channels, also as separate
+  per-channel on/off entities
 - Video/HDMI input and output signal descriptions
 - Input/output resolution and frame rate
 - HDR10, HDR10+, Dolby Vision, HLG and generic HDR markers
@@ -28,8 +30,15 @@ Depending on what the receiver and current source report:
 - Receiver model, manufacturer, firmware and serial number as device metadata
 - Downloadable Home Assistant diagnostics with host and serial number redacted
 
-Channel sensors use a familiar state such as `5.1` or `5.1.2`. Open the entity's
-details to see the individual channel codes and friendly channel names.
+Channel summary sensors use a familiar state such as `5.1` or `5.1.2`. In
+addition, the integration creates binary sensors such as **Input channel FL**,
+**Input channel C**, **Active output channel FL** and **Active output channel
+LFE/SW**. Their on/off state lets a normal Home Assistant grid highlight every
+channel independently, just like the channel matrix in the Denon app.
+
+The Denon app's stable input positions (FHL, LFE, EXT, FHR, FWL, FL, C, FR,
+FWR, SL, SR, SBL, SB and SBR) are always created. Any additional height or
+Dolby speaker positions reported by the receiver are added during setup.
 
 Unsupported values are marked unavailable. The integration does not guess a
 codec, channel or video property that the AVR did not return.
@@ -83,6 +92,82 @@ Open the integration and select **Configure** to change:
 
 Entity IDs include the Home Assistant device name. Replace the example IDs below
 with the IDs created on your system.
+
+### Denon-style input channel map
+
+Binary-sensor button cards automatically use the active color while a channel
+is present. The fixed grid below follows the position order shown in the Denon
+AVR Remote app.
+
+```yaml
+type: grid
+title: AVR input channels
+columns: 4
+square: false
+cards:
+  - type: button
+    entity: binary_sensor.denon_avr_input_channel_fhl
+    name: FHL
+    show_state: false
+  - type: button
+    entity: binary_sensor.denon_avr_input_channel_lfe
+    name: LFE
+    show_state: false
+  - type: button
+    entity: binary_sensor.denon_avr_input_channel_ext
+    name: EXT
+    show_state: false
+  - type: button
+    entity: binary_sensor.denon_avr_input_channel_fhr
+    name: FHR
+    show_state: false
+  - type: button
+    entity: binary_sensor.denon_avr_input_channel_fwl
+    name: FWL
+    show_state: false
+  - type: button
+    entity: binary_sensor.denon_avr_input_channel_fl
+    name: FL
+    show_state: false
+  - type: button
+    entity: binary_sensor.denon_avr_input_channel_c
+    name: C
+    show_state: false
+  - type: button
+    entity: binary_sensor.denon_avr_input_channel_fr
+    name: FR
+    show_state: false
+  - type: button
+    entity: binary_sensor.denon_avr_input_channel_fwr
+    name: FWR
+    show_state: false
+  - type: button
+    entity: binary_sensor.denon_avr_input_channel_sl
+    name: SL
+    show_state: false
+  - type: button
+    entity: binary_sensor.denon_avr_input_channel_sr
+    name: SR
+    show_state: false
+  - type: button
+    entity: binary_sensor.denon_avr_input_channel_sbl
+    name: SBL
+    show_state: false
+  - type: button
+    entity: binary_sensor.denon_avr_input_channel_sb
+    name: SB
+    show_state: false
+  - type: button
+    entity: binary_sensor.denon_avr_input_channel_sbr
+    name: SBR
+    show_state: false
+```
+
+Duplicate the grid and replace `input_channel` with `output_channel` to show
+which loudspeakers the AVR is currently driving. Use `configured_channel` for
+the installed/configured speaker map.
+
+### Signal details
 
 ```yaml
 type: sections

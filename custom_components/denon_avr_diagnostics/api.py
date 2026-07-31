@@ -231,9 +231,14 @@ def channel_layout(channels: Iterable[str]) -> str | None:
     unique = list(dict.fromkeys(channel.upper() for channel in channels))
     if not unique:
         return None
-    subwoofers = sum(channel == "SW" or channel.startswith("SW") for channel in unique)
+    # Denon uses SW for active speakers and may use LFE for the input signal.
+    subwoofers = sum(
+        channel == "LFE" or channel == "SW" or channel.startswith("SW")
+        for channel in unique
+    )
     heights = sum(channel in HEIGHT_CHANNELS for channel in unique)
-    bed = len(unique) - subwoofers - heights
+    # EXT is a flag/extension position in Denon's app, not a bed channel.
+    bed = len(unique) - subwoofers - heights - ("EXT" in unique)
     layout = f"{bed}.{subwoofers}"
     return f"{layout}.{heights}" if heights else layout
 
@@ -346,7 +351,11 @@ def parse_detail_response(
             )
 
         elif name == INPUT_SIGNAL:
-            channels = _channel_codes(params)
+            channels = _channel_codes(
+                item
+                for item in params
+                if item.get("control") not in (0, "0")
+            )
             _put(snapshot, "input_channels", channel_layout(channels))
             snapshot.attributes["input_channels"] = {
                 "channels": channels,

@@ -37,6 +37,8 @@ CHANNEL_NAMES: dict[str, str] = {
     "SW": "Subwoofer",
     "SW1": "Subwoofer 1",
     "SW2": "Subwoofer 2",
+    "LFE": "Low Frequency Effects",
+    "EXT": "External channel",
     "SL": "Surround Left",
     "SR": "Surround Right",
     "SBL": "Surround Back Left",
@@ -63,6 +65,48 @@ CHANNEL_NAMES: dict[str, str] = {
     "CH": "Center Height",
     "TS": "Top Surround",
 }
+
+# Match the familiar channel map used by the Denon AVR Remote app. Remaining
+# height/Dolby positions follow afterwards and are still exposed when reported.
+CHANNEL_ORDER: tuple[str, ...] = (
+    "FHL",
+    "LFE",
+    "EXT",
+    "FHR",
+    "FWL",
+    "FL",
+    "C",
+    "FR",
+    "FWR",
+    "SL",
+    "SR",
+    "SBL",
+    "SB",
+    "SBR",
+    "SW",
+    "SW1",
+    "SW2",
+    "TFL",
+    "TFR",
+    "TML",
+    "TMR",
+    "TRL",
+    "TRR",
+    "RHL",
+    "RHR",
+    "FDL",
+    "FDR",
+    "SDL",
+    "SDR",
+    "BDL",
+    "BDR",
+    "CH",
+    "TS",
+)
+
+# Positions shown on the input page of the Denon AVR Remote app. They are
+# created even while inactive so a dashboard can keep a stable channel map.
+APP_INPUT_CHANNEL_MAP = frozenset(CHANNEL_ORDER[:14])
 
 HEIGHT_CHANNELS = {
     "FHL",

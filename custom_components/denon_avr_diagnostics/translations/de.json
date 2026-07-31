@@ -28,6 +28,11 @@
     }
   },
   "entity": {
+    "binary_sensor": {
+      "input_channel": {"name": "Eingangskanal {channel}"},
+      "configured_channel": {"name": "Konfigurierter Lautsprecher {channel}"},
+      "output_channel": {"name": "Aktiver Ausgangskanal {channel}"}
+    },
     "sensor": {
       "power": {"name": "Stromstatus"},
       "source": {"name": "Eingangsquelle"},
