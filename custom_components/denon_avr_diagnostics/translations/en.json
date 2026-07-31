@@ -38,7 +38,7 @@
       "source": {"name": "Input source"},
       "audio_input_mode": {"name": "Audio input mode"},
       "audio_input_format": {"name": "Audio input format"},
-      "audio_output_format": {"name": "Audio output format"},
+      "audio_output_format": {"name": "Audio output destination"},
       "sound_mode": {"name": "Sound mode"},
       "sampling_rate": {"name": "Sampling rate"},
       "bit_rate": {"name": "Bit rate"},

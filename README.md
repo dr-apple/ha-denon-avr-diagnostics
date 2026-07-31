@@ -16,7 +16,7 @@ Denon and Marantz network receivers.
 
 Depending on what the receiver and current source report:
 
-- Audio input mode, input codec/format, decoded output format and active sound mode
+- Audio input mode, input codec/format, audio output destination and active sound mode
 - Sampling rate and bitrate when the receiver provides them
 - Input channel layout plus separate on/off entities for FL, FR, C, LFE,
   surround, back, wide and height channels

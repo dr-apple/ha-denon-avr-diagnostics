@@ -354,7 +354,10 @@ def parse_detail_response(
             channels = _channel_codes(
                 item
                 for item in params
-                if item.get("control") not in (0, "0")
+                # AppCommand0300 uses control=2 for a channel that is actually
+                # present in the current input signal. control=1 only marks a
+                # position the receiver can display in its channel matrix.
+                if item.get("control") in (2, "2")
             )
             _put(snapshot, "input_channels", channel_layout(channels))
             snapshot.attributes["input_channels"] = {
@@ -548,28 +551,37 @@ class DenonAvrClient:
         successes = 0
         errors: list[str] = []
 
-        async def detail() -> None:
-            nonlocal successes
+        # Older receivers such as the AVR-X1500H do not reliably return every
+        # command when multiple AppCommand0300 queries are bundled in one POST.
+        # They are also prone to dropping responses when both AppCommand
+        # endpoints are queried concurrently. Keep all receiver traffic
+        # sequential and request each detailed command on its own.
+        try:
+            parse_basic_response(
+                await self._post(APPCOMMAND_PATH, build_basic_request()), snapshot
+            )
+            successes += 1
+        except DenonAvrError as err:
+            errors.append(f"AppCommand: {err}")
+
+        for command in DETAIL_COMMANDS:
+            name = command[0]
             try:
                 parse_detail_response(
-                    await self._post(APPCOMMAND_0300_PATH, build_detail_request()), snapshot
+                    await self._post(
+                        APPCOMMAND_0300_PATH,
+                        build_detail_request((command,)),
+                    ),
+                    snapshot,
                 )
-                successes += 1
+                if name in snapshot.supported_commands:
+                    successes += 1
+                else:
+                    snapshot.unavailable_commands.add(name)
+                    errors.append(f"AppCommand0300 {name}: command not returned")
             except DenonAvrError as err:
-                errors.append(f"AppCommand0300: {err}")
-                snapshot.unavailable_commands.update(name for name, _ in DETAIL_COMMANDS)
-
-        async def basic() -> None:
-            nonlocal successes
-            try:
-                parse_basic_response(
-                    await self._post(APPCOMMAND_PATH, build_basic_request()), snapshot
-                )
-                successes += 1
-            except DenonAvrError as err:
-                errors.append(f"AppCommand: {err}")
-
-        await asyncio.gather(detail(), basic())
+                errors.append(f"AppCommand0300 {name}: {err}")
+                snapshot.unavailable_commands.add(name)
 
         if not {"power", "source", "sound_mode"} & snapshot.supported_fields:
             for path in STATUS_PATHS:
