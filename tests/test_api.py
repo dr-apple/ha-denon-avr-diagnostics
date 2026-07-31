@@ -1,6 +1,8 @@
 """Parser tests that do not require Home Assistant."""
 
 from custom_components.denon_avr_diagnostics.api import (
+    DETAIL_COMMANDS,
+    build_detail_request,
     channel_layout,
     normalize_host,
     parse_basic_response,
@@ -80,11 +82,19 @@ def test_input_parser_ignores_control_zero_channels() -> None:
         <param name="inputsiga1" control="2">FL</param>
         <param name="inputsigb1" control="2">FR</param>
         <param name="inputsigc1" control="2">LFE</param>
+        <param name="inputsigc3" control="1">SR</param>
         <param name="inputsigc2" control="0">C</param>
         </list></cmd></rx>"""
     )
     assert snapshot.values["input_channels"] == "2.1"
     assert snapshot.attributes["input_channels"]["channels"] == ["FL", "FR", "LFE"]
+
+
+def test_single_detail_request_contains_only_requested_command() -> None:
+    request = build_detail_request((DETAIL_COMMANDS[1],))
+    assert request.count(b"<cmd") == 1
+    assert b"GetInputSignal" in request
+    assert b"GetAudioInfo" not in request
 
 
 def test_normalize_ipv6_host() -> None:
