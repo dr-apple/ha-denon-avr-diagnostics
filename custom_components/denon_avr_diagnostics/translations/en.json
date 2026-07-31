@@ -1,0 +1,58 @@
+{
+  "title": "Denon AVR Diagnostics",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Connect to your Denon/Marantz receiver",
+        "description": "Enter the local host name or IP address. The integration detects the supported HTTP interface automatically.",
+        "data": {"host": "Host or IP address"}
+      }
+    },
+    "error": {
+      "cannot_connect": "Failed to connect to the receiver",
+      "invalid_host": "Enter a valid host name or IP address",
+      "unknown": "Unexpected error"
+    },
+    "abort": {"already_configured": "This receiver is already configured"}
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Denon AVR Diagnostics options",
+        "description": "Telnet can improve fallback coverage but the receiver may permit only one Telnet client.",
+        "data": {
+          "scan_interval": "Update interval (seconds)",
+          "use_telnet": "Use Telnet fallback"
+        }
+      }
+    }
+  },
+  "entity": {
+    "sensor": {
+      "power": {"name": "Power"},
+      "source": {"name": "Input source"},
+      "audio_input_mode": {"name": "Audio input mode"},
+      "audio_input_format": {"name": "Audio input format"},
+      "audio_output_format": {"name": "Audio output format"},
+      "sound_mode": {"name": "Sound mode"},
+      "sampling_rate": {"name": "Sampling rate"},
+      "bit_rate": {"name": "Bit rate"},
+      "input_channels": {"name": "Input channels"},
+      "configured_speakers": {"name": "Configured speakers"},
+      "active_output_channels": {"name": "Active output channels"},
+      "video_output": {"name": "Video output"},
+      "hdmi_input_signal": {"name": "HDMI input signal"},
+      "video_input_resolution": {"name": "Video input resolution"},
+      "video_input_frame_rate": {"name": "Video input frame rate"},
+      "video_input_hdr": {"name": "Video input HDR"},
+      "video_input_color_space": {"name": "Video input color space"},
+      "video_input_color_depth": {"name": "Video input color depth"},
+      "hdmi_output_signal": {"name": "HDMI output signal"},
+      "video_output_resolution": {"name": "Video output resolution"},
+      "video_output_frame_rate": {"name": "Video output frame rate"},
+      "video_output_hdr": {"name": "Video output HDR"},
+      "video_output_color_space": {"name": "Video output color space"},
+      "video_output_color_depth": {"name": "Video output color depth"}
+    }
+  }
+}
