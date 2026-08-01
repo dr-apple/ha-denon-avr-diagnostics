@@ -93,6 +93,19 @@ Open the integration and select **Configure** to change:
 Entity IDs include the Home Assistant device name. Replace the example IDs below
 with the IDs created on your system.
 
+### Complete app-style card with tabs
+
+The repository includes a complete, copyable Denon-style card with **Input**,
+**Output** and **Signal** tabs:
+
+- [Complete dashboard card YAML](examples/denon-avr-dashboard-card.yaml)
+- [Installation, required HACS cards and entity mapping](examples/README.md)
+
+The example is self-contained. Its 29 channel buttons contain their styles
+directly and do not depend on a dashboard-level `button_card_templates` block.
+This means the whole card can be copied to another dashboard from Home
+Assistant's manual card editor.
+
 ### Denon-style input channel map
 
 Binary-sensor button cards automatically use the active color while a channel

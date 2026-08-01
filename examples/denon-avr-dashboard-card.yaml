@@ -1,0 +1,2926 @@
+# Complete self-contained Denon/Marantz AVR diagnostics card.
+# Paste everything below into a Home Assistant Manual card.
+# Replace the example entity IDs with the IDs created on your system.
+# Required HACS frontend cards are listed in examples/README.md.
+{
+  "type": "custom:tabbed-card",
+  "options": {
+    "defaultTabIndex": 0
+  },
+  "styles": {
+    "--mdc-theme-primary": "#6eb52f",
+    "--mdc-tab-text-label-color-default": "rgba(225,225,225,0.62)",
+    "--mdc-typography-button-font-size": "14px"
+  },
+  "tabs": [
+    {
+      "attributes": {
+        "label": "Eingang",
+        "icon": "mdi:import"
+      },
+      "card": {
+        "type": "custom:stack-in-card",
+        "mode": "vertical",
+        "cards": [
+          {
+            "type": "custom:mushroom-entity-card",
+            "entity": "sensor.denon_avr_input_channels",
+            "name": "EINGANGSSIGNAL",
+            "icon": "mdi:import",
+            "layout": "horizontal",
+            "primary_info": "name",
+            "secondary_info": "state",
+            "tap_action": {
+              "action": "more-info"
+            },
+            "card_mod": {
+              "style": "ha-card { background: #101519; border: 0; --primary-text-color: #eef2f5; --secondary-text-color: #8d969e; }"
+            }
+          },
+          {
+            "type": "grid",
+            "columns": 5,
+            "square": false,
+            "cards": [
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_input_channel_fhl",
+                "name": "FHL",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_input_channel_lfe",
+                "name": "LFE",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_input_channel_ext",
+                "name": "EXT",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_input_channel_fhr",
+                "name": "FHR",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "color_type": "blank-card"
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_input_channel_fwl",
+                "name": "FWL",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_input_channel_fl",
+                "name": "FL",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_input_channel_c",
+                "name": "C",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_input_channel_fr",
+                "name": "FR",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_input_channel_fwr",
+                "name": "FWR",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "color_type": "blank-card"
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_input_channel_sl",
+                "name": "SL",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "color_type": "blank-card"
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_input_channel_sr",
+                "name": "SR",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "color_type": "blank-card"
+              },
+              {
+                "type": "custom:button-card",
+                "color_type": "blank-card"
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_input_channel_sbl",
+                "name": "SBL",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_input_channel_sb",
+                "name": "SB",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_input_channel_sbr",
+                "name": "SBR",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "color_type": "blank-card"
+              }
+            ]
+          },
+          {
+            "type": "grid",
+            "columns": 2,
+            "square": false,
+            "cards": [
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_audio_input_format",
+                "name": "Format",
+                "icon": "mdi:waveform",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              },
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_audio_input_mode",
+                "name": "Modus",
+                "icon": "mdi:tune",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              },
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_input_channels",
+                "name": "Kanäle",
+                "icon": "mdi:surround-sound",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              },
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_sampling_rate",
+                "name": "Rate",
+                "icon": "mdi:sine-wave",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              }
+            ]
+          }
+        ],
+        "card_mod": {
+          "style": "ha-card { background: #0d1115; border: 1px solid #2a3138; border-radius: 24px; padding: 10px; box-shadow: 0 18px 48px rgba(0,0,0,0.28); }"
+        },
+        "grid_options": {
+          "columns": "full",
+          "rows": "auto"
+        }
+      }
+    },
+    {
+      "attributes": {
+        "label": "Ausgang",
+        "icon": "mdi:export"
+      },
+      "card": {
+        "type": "custom:stack-in-card",
+        "mode": "vertical",
+        "cards": [
+          {
+            "type": "custom:mushroom-entity-card",
+            "entity": "sensor.denon_avr_active_output_channels",
+            "name": "AKTIVE LAUTSPRECHER",
+            "icon": "mdi:speaker-multiple",
+            "layout": "horizontal",
+            "primary_info": "name",
+            "secondary_info": "state",
+            "tap_action": {
+              "action": "more-info"
+            },
+            "card_mod": {
+              "style": "ha-card { background: #101519; border: 0; --primary-text-color: #eef2f5; --secondary-text-color: #8d969e; }"
+            }
+          },
+          {
+            "type": "grid",
+            "columns": 5,
+            "square": false,
+            "cards": [
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_fhl",
+                "name": "FHL",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_tml",
+                "name": "TML",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "color_type": "blank-card"
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_tmr",
+                "name": "TMR",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_fhr",
+                "name": "FHR",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_fwl",
+                "name": "FWL",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_fl",
+                "name": "FL",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_c",
+                "name": "C",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_fr",
+                "name": "FR",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_fwr",
+                "name": "FWR",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "color_type": "blank-card"
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_sl",
+                "name": "SL",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_sw",
+                "name": "SW",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_sr",
+                "name": "SR",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "color_type": "blank-card"
+              },
+              {
+                "type": "custom:button-card",
+                "color_type": "blank-card"
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_sbl",
+                "name": "SBL",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_sb",
+                "name": "SB",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "entity": "binary_sensor.denon_avr_output_channel_sbr",
+                "name": "SBR",
+                "show_icon": false,
+                "show_state": false,
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "hold_action": {
+                  "action": "none"
+                },
+                "styles": {
+                  "card": [
+                    {
+                      "height": "46px"
+                    },
+                    {
+                      "border-radius": "9px"
+                    },
+                    {
+                      "background": "#11171b"
+                    },
+                    {
+                      "border": "1px solid #1d252b"
+                    },
+                    {
+                      "box-shadow": "none"
+                    },
+                    {
+                      "padding": "4px"
+                    }
+                  ],
+                  "name": [
+                    {
+                      "color": "#606a73"
+                    },
+                    {
+                      "font-size": "13px"
+                    },
+                    {
+                      "font-weight": "500"
+                    }
+                  ]
+                },
+                "state": [
+                  {
+                    "value": "on",
+                    "styles": {
+                      "card": [
+                        {
+                          "background": "#6eb52f"
+                        },
+                        {
+                          "border-color": "#7ec73d"
+                        },
+                        {
+                          "box-shadow": "0 0 18px rgba(110,181,47,0.18)"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#15200d"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "value": "unavailable",
+                    "styles": {
+                      "card": [
+                        {
+                          "opacity": "0.35"
+                        }
+                      ],
+                      "name": [
+                        {
+                          "color": "#737b82"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "custom:button-card",
+                "color_type": "blank-card"
+              }
+            ]
+          },
+          {
+            "type": "grid",
+            "columns": 2,
+            "square": false,
+            "cards": [
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_active_output_channels",
+                "name": "Aktiv",
+                "icon": "mdi:speaker-multiple",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              },
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_configured_speakers",
+                "name": "Konfiguriert",
+                "icon": "mdi:speaker",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              },
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_sound_mode",
+                "name": "Klangmodus",
+                "icon": "mdi:dolby",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              },
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_audio_output_format",
+                "name": "Ausgabeziel",
+                "icon": "mdi:audio-video",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              }
+            ]
+          }
+        ],
+        "card_mod": {
+          "style": "ha-card { background: #0d1115; border: 1px solid #2a3138; border-radius: 24px; padding: 10px; box-shadow: 0 18px 48px rgba(0,0,0,0.28); }"
+        },
+        "grid_options": {
+          "columns": "full",
+          "rows": "auto"
+        }
+      }
+    },
+    {
+      "attributes": {
+        "label": "Signal",
+        "icon": "mdi:audio-video"
+      },
+      "card": {
+        "type": "custom:stack-in-card",
+        "mode": "vertical",
+        "cards": [
+          {
+            "type": "custom:mushroom-entity-card",
+            "entity": "sensor.denon_avr_power",
+            "name": "SIGNALDETAILS",
+            "icon": "mdi:audio-video",
+            "layout": "horizontal",
+            "primary_info": "name",
+            "secondary_info": "state",
+            "tap_action": {
+              "action": "more-info"
+            },
+            "card_mod": {
+              "style": "ha-card { background: #101519; border: 0; --primary-text-color: #eef2f5; --secondary-text-color: #8d969e; }"
+            }
+          },
+          {
+            "type": "grid",
+            "columns": 2,
+            "square": false,
+            "cards": [
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_audio_input_format",
+                "name": "Audioformat",
+                "icon": "mdi:waveform",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              },
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_sound_mode",
+                "name": "Klangmodus",
+                "icon": "mdi:dolby",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              },
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_video_input_resolution",
+                "name": "Video Eingang",
+                "icon": "mdi:video-input-hdmi",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              },
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_video_output_resolution",
+                "name": "Video Ausgang",
+                "icon": "mdi:video-output",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              },
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_video_input_hdr",
+                "name": "HDR Eingang",
+                "icon": "mdi:brightness-7",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              },
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_video_output_hdr",
+                "name": "HDR Ausgang",
+                "icon": "mdi:brightness-7",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              },
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_video_input_color_space",
+                "name": "Farbraum",
+                "icon": "mdi:palette",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              },
+              {
+                "type": "custom:mushroom-entity-card",
+                "entity": "sensor.denon_avr_video_input_color_depth",
+                "name": "Farbtiefe",
+                "icon": "mdi:invert-colors",
+                "layout": "horizontal",
+                "primary_info": "state",
+                "secondary_info": "name",
+                "tap_action": {
+                  "action": "more-info"
+                },
+                "card_mod": {
+                  "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+                }
+              }
+            ]
+          },
+          {
+            "type": "custom:mushroom-entity-card",
+            "entity": "sensor.denon_avr_hdmi_input_signal",
+            "name": "HDMI-Eingangssignal",
+            "icon": "mdi:hdmi-port",
+            "layout": "horizontal",
+            "primary_info": "state",
+            "secondary_info": "name",
+            "tap_action": {
+              "action": "more-info"
+            },
+            "card_mod": {
+              "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+            }
+          },
+          {
+            "type": "custom:mushroom-entity-card",
+            "entity": "sensor.denon_avr_hdmi_output_signal",
+            "name": "HDMI-Ausgangssignal",
+            "icon": "mdi:hdmi-port",
+            "layout": "horizontal",
+            "primary_info": "state",
+            "secondary_info": "name",
+            "tap_action": {
+              "action": "more-info"
+            },
+            "card_mod": {
+              "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+            }
+          },
+          {
+            "type": "custom:mushroom-entity-card",
+            "entity": "sensor.denon_avr_video_output",
+            "name": "Monitor",
+            "icon": "mdi:monitor",
+            "layout": "horizontal",
+            "primary_info": "state",
+            "secondary_info": "name",
+            "tap_action": {
+              "action": "more-info"
+            },
+            "card_mod": {
+              "style": "ha-card { background: #141a1f; border: 1px solid #252d33; }"
+            }
+          }
+        ],
+        "card_mod": {
+          "style": "ha-card { background: #0d1115; border: 1px solid #2a3138; border-radius: 24px; padding: 10px; box-shadow: 0 18px 48px rgba(0,0,0,0.28); }"
+        },
+        "grid_options": {
+          "columns": "full",
+          "rows": "auto"
+        }
+      }
+    }
+  ],
+  "card_mod": {
+    "style": "ha-card { background: transparent; border: 0; box-shadow: none; }"
+  },
+  "grid_options": {
+    "columns": "full",
+    "rows": "auto"
+  }
+}
