@@ -19,6 +19,10 @@ async def async_get_config_entry_diagnostics(
     coordinator = entry.runtime_data
     snapshot = coordinator.data
     info = coordinator.client.info
+    transport_notes = {
+        "appcommand0300": snapshot.raw.get("appcommand0300", {}),
+        "error_sources": [error.partition(":")[0] for error in snapshot.raw.get("errors", [])],
+    }
     return {
         "entry": async_redact_data(
             {"data": dict(entry.data), "options": dict(entry.options)}, TO_REDACT
@@ -41,6 +45,6 @@ async def async_get_config_entry_diagnostics(
             "supported_fields": sorted(snapshot.supported_fields),
             "values": snapshot.values,
             "attributes": snapshot.attributes,
-            "transport_notes": snapshot.raw,
+            "transport_notes": transport_notes,
         },
     }

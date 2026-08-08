@@ -88,13 +88,9 @@ async def async_setup_entry(
         "active_output_channels",
     ):
         reported_channels.update(
-            entry.runtime_data.data.attributes.get(attribute_key, {}).get(
-                "channels", []
-            )
+            entry.runtime_data.data.attributes.get(attribute_key, {}).get("channels", [])
         )
-    channels = tuple(
-        channel for channel in CHANNEL_ORDER if channel in reported_channels
-    )
+    channels = tuple(channel for channel in CHANNEL_ORDER if channel in reported_channels)
     async_add_entities(
         DenonAvrChannelBinarySensor(entry.runtime_data, description)
         for description in _channel_descriptions(channels)
@@ -115,9 +111,7 @@ class DenonAvrChannelBinarySensor(
     ) -> None:
         super().__init__(coordinator)
         self.entity_description = description
-        self._attr_unique_id = (
-            f"{coordinator.config_entry.unique_id}_{description.key}"
-        )
+        self._attr_unique_id = f"{coordinator.config_entry.unique_id}_{description.key}"
         self._attr_translation_placeholders = {"channel": description.channel}
 
     @property
@@ -141,16 +135,13 @@ class DenonAvrChannelBinarySensor(
         """Return whether the AVR supports this channel group."""
         return (
             super().available
-            and self.entity_description.command
-            in self.coordinator.data.supported_commands
+            and self.entity_description.command in self.coordinator.data.supported_commands
         )
 
     @property
     def is_on(self) -> bool:
         """Return whether this exact channel is present or active."""
-        attributes = self.coordinator.data.attributes.get(
-            self.entity_description.attribute_key, {}
-        )
+        attributes = self.coordinator.data.attributes.get(self.entity_description.attribute_key, {})
         return self.entity_description.channel in attributes.get("channels", [])
 
     @property
@@ -160,7 +151,5 @@ class DenonAvrChannelBinarySensor(
             "channel_code": self.entity_description.channel,
             "channel_name": CHANNEL_NAMES[self.entity_description.channel],
             "channel_group": self.entity_description.attribute_key,
-            "layout": self.coordinator.data.values.get(
-                self.entity_description.attribute_key
-            ),
+            "layout": self.coordinator.data.values.get(self.entity_description.attribute_key),
         }

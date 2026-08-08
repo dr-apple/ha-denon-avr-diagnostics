@@ -233,8 +233,7 @@ def channel_layout(channels: Iterable[str]) -> str | None:
         return None
     # Denon uses SW for active speakers and may use LFE for the input signal.
     subwoofers = sum(
-        channel == "LFE" or channel == "SW" or channel.startswith("SW")
-        for channel in unique
+        channel == "LFE" or channel == "SW" or channel.startswith("SW") for channel in unique
     )
     heights = sum(channel in HEIGHT_CHANNELS for channel in unique)
     # EXT is a flag/extension position in Denon's app, not a bed channel.
@@ -340,7 +339,9 @@ def parse_detail_response(
                 "fs": "sampling_rate",
             }
             for param, key in mapping.items():
-                raw = (by_name.get(param) or {}).get("text")
+                if param not in by_name:
+                    continue
+                raw = by_name[param].get("text")
                 _put(snapshot, key, _parse_sample_rate(raw) if key == "sampling_rate" else raw)
             all_audio_text = " ".join(item["text"] or "" for item in params)
             _put(
@@ -387,7 +388,9 @@ def parse_detail_response(
                 ("hdmisigin", "hdmi_input_signal"),
                 ("hdmisigout", "hdmi_output_signal"),
             ):
-                item = by_name.get(param) or {}
+                if param not in by_name:
+                    continue
+                item = by_name[param]
                 raw = item.get("text")
                 nested = item.get("nested") or {}
                 if nested:
@@ -401,7 +404,8 @@ def parse_detail_response(
             ):
                 details = parse_video_signal(snapshot.values.get(source_key))
                 for field in ("resolution", "frame_rate", "hdr", "color_space", "color_depth"):
-                    _put(snapshot, f"video_{direction}_{field}", details.get(field))
+                    if field in details:
+                        _put(snapshot, f"video_{direction}_{field}", details[field])
 
     snapshot.raw["appcommand0300"] = {
         "commands": sorted(snapshot.supported_commands),
@@ -557,10 +561,12 @@ class DenonAvrClient:
         # endpoints are queried concurrently. Keep all receiver traffic
         # sequential and request each detailed command on its own.
         try:
-            parse_basic_response(
-                await self._post(APPCOMMAND_PATH, build_basic_request()), snapshot
-            )
-            successes += 1
+            previous_fields = len(snapshot.supported_fields)
+            parse_basic_response(await self._post(APPCOMMAND_PATH, build_basic_request()), snapshot)
+            if len(snapshot.supported_fields) > previous_fields:
+                successes += 1
+            else:
+                errors.append("AppCommand: no status fields returned")
         except DenonAvrError as err:
             errors.append(f"AppCommand: {err}")
 
@@ -586,24 +592,33 @@ class DenonAvrClient:
         if not {"power", "source", "sound_mode"} & snapshot.supported_fields:
             for path in STATUS_PATHS:
                 try:
+                    previous_fields = len(snapshot.supported_fields)
                     parse_legacy_status(await self._get(path), snapshot)
-                    successes += 1
-                    break
+                    if len(snapshot.supported_fields) > previous_fields:
+                        successes += 1
+                        break
+                    errors.append(f"{path}: no status fields returned")
                 except DenonAvrError as err:
                     errors.append(f"{path}: {err}")
 
-        if use_telnet or successes == 0:
+        http_succeeded = successes > 0
+        telnet_succeeded = False
+        if use_telnet:
             try:
                 telnet = await self._telnet_status()
                 for key, value in telnet.items():
                     _put(snapshot, key, value)
                 successes += 1
+                telnet_succeeded = True
             except DenonAvrError as err:
                 errors.append(f"Telnet: {err}")
 
         if successes == 0:
             raise DenonAvrConnectionError("; ".join(errors))
-        snapshot.transport = "HTTP + Telnet" if use_telnet else "HTTP"
+        if telnet_succeeded:
+            snapshot.transport = "HTTP + Telnet" if http_succeeded else "Telnet"
+        else:
+            snapshot.transport = "HTTP"
         snapshot.raw["errors"] = errors
         return snapshot
 
@@ -619,7 +634,11 @@ class DenonAvrClient:
                 while len(lines) < 8:
                     try:
                         line = await asyncio.wait_for(reader.readuntil(b"\r"), timeout=0.5)
-                    except (TimeoutError, asyncio.IncompleteReadError, asyncio.LimitOverrunError):
+                    except (
+                        TimeoutError,
+                        asyncio.IncompleteReadError,
+                        asyncio.LimitOverrunError,
+                    ):
                         break
                     lines.append(line.decode(errors="replace").strip())
         except (TimeoutError, OSError) as err:

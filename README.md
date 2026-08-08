@@ -8,6 +8,8 @@ It is designed primarily around the **Denon AVR-X1500H** and the 2016-generation
 AppCommand interface, with feature detection and fallbacks for related modern
 Denon and Marantz network receivers.
 
+Version 0.3.1 is tested against Home Assistant 2026.8.1 on Python 3.14.
+
 > This integration complements Home Assistant's built-in Denon AVR media player.
 > It uses the separate domain `denon_avr_diagnostics` and does not override the
 > built-in integration.
