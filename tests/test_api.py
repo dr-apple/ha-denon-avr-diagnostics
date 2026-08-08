@@ -1,7 +1,13 @@
-"""Parser tests that do not require Home Assistant."""
+"""Protocol parser and receiver client tests."""
+
+from unittest.mock import AsyncMock
+
+import pytest
 
 from custom_components.denon_avr_diagnostics.api import (
     DETAIL_COMMANDS,
+    DenonAvrClient,
+    DenonAvrConnectionError,
     build_detail_request,
     channel_layout,
     normalize_host,
@@ -108,3 +114,67 @@ def test_basic_parser_uses_command_order() -> None:
         "source": "BD",
         "sound_mode": "DOLBY ATMOS",
     }
+
+
+def test_missing_audio_and_video_parameters_are_not_marked_supported() -> None:
+    snapshot = parse_detail_response(
+        b"""<rx>
+        <cmd><name>GetAudioInfo</name><list>
+          <param name="signal">Dolby Digital</param>
+        </list></cmd>
+        <cmd><name>GetVideoInfo</name><list>
+          <param name="hdmisigin">1920x1080p / 60 Hz</param>
+        </list></cmd>
+        </rx>"""
+    )
+
+    assert "audio_input_format" in snapshot.supported_fields
+    assert "audio_output_format" not in snapshot.supported_fields
+    assert "hdmi_input_signal" in snapshot.supported_fields
+    assert "hdmi_output_signal" not in snapshot.supported_fields
+    assert "video_input_resolution" in snapshot.supported_fields
+    assert "video_input_hdr" not in snapshot.supported_fields
+
+
+@pytest.mark.asyncio
+async def test_disabled_telnet_fallback_is_not_used() -> None:
+    client = DenonAvrClient(AsyncMock(), "avr.example")
+    client.port = 80
+    client._post = AsyncMock(side_effect=DenonAvrConnectionError("offline"))
+    client._get = AsyncMock(side_effect=DenonAvrConnectionError("offline"))
+    client._telnet_status = AsyncMock(return_value={"power": "ON"})
+
+    with pytest.raises(DenonAvrConnectionError):
+        await client.async_update(use_telnet=False)
+
+    client._telnet_status.assert_not_awaited()
+
+
+@pytest.mark.asyncio
+async def test_transport_only_reports_successful_telnet() -> None:
+    client = DenonAvrClient(AsyncMock(), "avr.example")
+    client.port = 80
+    client._post = AsyncMock(
+        side_effect=[
+            b"<rx><cmd><zone1>ON</zone1></cmd></rx>",
+            *(b"<rx/>" for _ in DETAIL_COMMANDS),
+        ]
+    )
+    client._telnet_status = AsyncMock(side_effect=DenonAvrConnectionError("disabled"))
+
+    snapshot = await client.async_update(use_telnet=True)
+
+    assert snapshot.transport == "HTTP"
+
+
+@pytest.mark.asyncio
+async def test_telnet_only_transport_is_reported_accurately() -> None:
+    client = DenonAvrClient(AsyncMock(), "avr.example")
+    client.port = 80
+    client._post = AsyncMock(side_effect=DenonAvrConnectionError("offline"))
+    client._get = AsyncMock(side_effect=DenonAvrConnectionError("offline"))
+    client._telnet_status = AsyncMock(return_value={"power": "ON"})
+
+    snapshot = await client.async_update(use_telnet=True)
+
+    assert snapshot.transport == "Telnet"
