@@ -1,5 +1,11 @@
 # Denon AVR Diagnostics for Home Assistant
 
+**English** · [Deutsch](README.de.md)
+
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-41BDF5.svg)](https://hacs.xyz)
+
+![Denon AVR Diagnostics](docs/images/banner.svg)
+
 A HACS-compatible custom integration that exposes the audio and video signal
 diagnostics available in the Denon/Marantz AVR app as native Home Assistant
 sensors.
@@ -13,6 +19,8 @@ Version 0.3.1 is tested against Home Assistant 2026.8.1 on Python 3.14.
 > This integration complements Home Assistant's built-in Denon AVR media player.
 > It uses the separate domain `denon_avr_diagnostics` and does not override the
 > built-in integration.
+
+![How it works: AVR → Home Assistant → dashboard](docs/images/how-it-works.svg)
 
 ## What it exposes
 
@@ -41,6 +49,10 @@ channel independently, just like the channel matrix in the Denon app.
 The Denon app's stable input positions (FHL, LFE, EXT, FHR, FWL, FL, C, FR,
 FWR, SL, SR, SBL, SB and SBR) are always created. Any additional height or
 Dolby speaker positions reported by the receiver are added during setup.
+
+<img src="docs/images/signal.svg" alt="Example sensors: audio format, channels, sound mode, video resolution and HDR" width="440"> <img src="docs/images/channel-map.svg" alt="Channel map: active input channels highlighted" width="440">
+
+*Illustrations – example values; what you see depends on the receiver and the current source.*
 
 Unsupported values are marked unavailable. The integration does not guess a
 codec, channel or video property that the AVR did not return.
@@ -283,6 +295,26 @@ sections:
   diagnostics** when reporting an issue.
 - Disable Telnet fallback if another application already owns the receiver's
   Telnet connection.
+
+## Example automation
+
+Dim the lights to a movie scene as soon as a Dolby Vision or HDR10 signal arrives at the AVR:
+
+```yaml
+triggers:
+  - trigger: state
+    entity_id: sensor.denon_avr_video_input_hdr
+conditions:
+  - condition: template
+    value_template: >
+      {{ trigger.to_state.state not in ['unknown', 'unavailable', 'SDR', 'Off', 'None'] }}
+actions:
+  - action: scene.turn_on
+    target:
+      entity_id: scene.movie
+```
+
+Check the exact states of your receiver under *Developer tools → States* first.
 
 ## Technical references
 
