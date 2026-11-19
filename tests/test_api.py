@@ -77,6 +77,14 @@ def test_video_parser_short_resolution() -> None:
     assert parsed["color_space"] == "RGB"
 
 
+def test_video_signal_with_colon_frame_rate() -> None:
+    # AVR-X1500H reports HDMI signals as "720p:50Hz".
+    parsed = parse_video_signal("720p:50Hz")
+    assert parsed["resolution"] == "720p"
+    assert parsed["frame_rate"] == 50.0
+    assert parse_video_signal("2160p:23.98Hz")["frame_rate"] == 23.98
+
+
 def test_channel_layout() -> None:
     assert channel_layout(["FL", "FR", "C", "SL", "SR", "SW", "TML", "TMR"]) == "5.1.2"
     assert channel_layout(["FL", "FR", "LFE"]) == "2.1"
