@@ -17,6 +17,10 @@ Install these five frontend cards from HACS before adding the example:
 
 Reload the browser after installing or updating frontend cards.
 
+Each tab uses Stack In Card with `keep: {background: true, border_radius: true}`.
+Without it, Stack In Card makes the inner cards transparent, so an active
+channel only shows a green outline instead of a filled green button.
+
 ## Add the card
 
 1. Open a Home Assistant dashboard and select **Edit dashboard**.
