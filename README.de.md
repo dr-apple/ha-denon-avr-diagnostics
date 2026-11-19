@@ -10,9 +10,15 @@ HACS-kompatible Integration, die die Audio- und Video-Signaldiagnose aus der Den
 
 Entwickelt vor allem für den **Denon AVR-X1500H** und die AppCommand-Schnittstelle der Generation 2016, mit Feature-Erkennung und Fallbacks für verwandte moderne Denon- und Marantz-Netzwerk-Receiver.
 
-Version 0.3.1 ist gegen Home Assistant 2026.8.1 mit Python 3.14 getestet.
+Version 0.3.3 ist gegen Home Assistant 2026.8.1 mit Python 3.14 getestet.
 
 > Diese Integration ergänzt den eingebauten Denon-AVR-Mediaplayer von Home Assistant. Sie nutzt die eigene Domain `denon_avr_diagnostics` und ersetzt die eingebaute Integration nicht.
+
+## Video
+
+[![Video: Denon AVR Diagnostics in Home Assistant (YouTube)](docs/images/video.jpg)](https://youtu.be/-KYdDoCFBkM)
+
+▶ **[Video auf YouTube ansehen](https://youtu.be/-KYdDoCFBkM)** (4 Min.): Kommt wirklich Dolby Atmos an oder nur hochgerechnetes Stereo? Installation, Dashboard-Karte im Stil der App und Ein- und Ausgangskanäle live an einem echten AVR-X1500H. · [Short (45 s)](https://youtube.com/shorts/3Uw1vo9AZac)
 
 ![So funktioniert's: AVR → Home Assistant → Dashboard](docs/images/how-it-works.svg)
 

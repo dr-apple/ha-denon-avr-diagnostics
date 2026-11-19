@@ -14,11 +14,17 @@ It is designed primarily around the **Denon AVR-X1500H** and the 2016-generation
 AppCommand interface, with feature detection and fallbacks for related modern
 Denon and Marantz network receivers.
 
-Version 0.3.1 is tested against Home Assistant 2026.8.1 on Python 3.14.
+Version 0.3.3 is tested against Home Assistant 2026.8.1 on Python 3.14.
 
 > This integration complements Home Assistant's built-in Denon AVR media player.
 > It uses the separate domain `denon_avr_diagnostics` and does not override the
 > built-in integration.
+
+## Video
+
+[![Video: Denon AVR Diagnostics in Home Assistant (YouTube)](docs/images/video.jpg)](https://youtu.be/-KYdDoCFBkM)
+
+▶ **[Watch the video on YouTube](https://youtu.be/-KYdDoCFBkM)** (German, 4 min – YouTube can auto-translate the subtitles): Dolby Atmos or upmixed stereo? Setup, the app-style dashboard card and live input/output channels on a real AVR-X1500H. · [Short (45 s)](https://youtube.com/shorts/3Uw1vo9AZac)
 
 ![How it works: AVR → Home Assistant → dashboard](docs/images/how-it-works.svg)
 
