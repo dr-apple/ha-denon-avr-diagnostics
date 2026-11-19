@@ -21,6 +21,10 @@
       "card": {
         "type": "custom:stack-in-card",
         "mode": "vertical",
+        "keep": {
+          "background": true,
+          "border_radius": true
+        },
         "cards": [
           {
             "type": "custom:mushroom-entity-card",
@@ -1329,6 +1333,10 @@
       "card": {
         "type": "custom:stack-in-card",
         "mode": "vertical",
+        "keep": {
+          "background": true,
+          "border_radius": true
+        },
         "cards": [
           {
             "type": "custom:mushroom-entity-card",
@@ -2717,6 +2725,10 @@
       "card": {
         "type": "custom:stack-in-card",
         "mode": "vertical",
+        "keep": {
+          "background": true,
+          "border_radius": true
+        },
         "cards": [
           {
             "type": "custom:mushroom-entity-card",
