@@ -85,6 +85,14 @@ def test_video_signal_with_colon_frame_rate() -> None:
     assert parse_video_signal("2160p:23.98Hz")["frame_rate"] == 23.98
 
 
+def test_video_signal_with_4k_label() -> None:
+    # AVR-X1500H reports UHD signals as "4K:50Hz".
+    parsed = parse_video_signal("4K:50Hz")
+    assert parsed["resolution"] == "4K"
+    assert parsed["frame_rate"] == 50.0
+    assert "resolution" not in parse_video_signal("Dolby Atmos 5.1.4K")
+
+
 def test_channel_layout() -> None:
     assert channel_layout(["FL", "FR", "C", "SL", "SR", "SW", "TML", "TMR"]) == "5.1.2"
     assert channel_layout(["FL", "FR", "LFE"]) == "2.1"
