@@ -37,6 +37,7 @@ _RESOLUTION_RE = re.compile(
 _SHORT_RESOLUTION_RE = re.compile(
     r"\b(?P<height>480|576|720|1080|1440|2160|4320)(?P<scan>[pi])\b", re.I
 )
+_K_RESOLUTION_RE = re.compile(r"(?<![\d.])(?P<k>4|8)K\b", re.I)
 _FRAME_RATE_RE = re.compile(r"(?:@|/|:|\s)(?P<rate>\d{2,3}(?:\.\d{1,3})?)\s*(?:Hz|fps)\b", re.I)
 _DEPTH_RE = re.compile(r"\b(?P<depth>8|10|12|14|16)\s*(?:bit|bits|bpc)\b", re.I)
 _SAMPLE_RATE_RE = re.compile(r"(?P<rate>\d+(?:\.\d+)?)\s*(?P<unit>k?Hz)\b", re.I)
@@ -282,6 +283,10 @@ def parse_video_signal(value: str | None) -> dict[str, Any]:
         short = _SHORT_RESOLUTION_RE.search(value)
         if short:
             result["resolution"] = f"{short.group('height')}{short.group('scan').lower()}"
+        else:
+            k_res = _K_RESOLUTION_RE.search(value)
+            if k_res:
+                result["resolution"] = f"{k_res.group('k')}K"
     frame_rate = _FRAME_RATE_RE.search(value)
     if frame_rate:
         result["frame_rate"] = float(frame_rate.group("rate"))
