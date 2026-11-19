@@ -37,7 +37,7 @@ _RESOLUTION_RE = re.compile(
 _SHORT_RESOLUTION_RE = re.compile(
     r"\b(?P<height>480|576|720|1080|1440|2160|4320)(?P<scan>[pi])\b", re.I
 )
-_FRAME_RATE_RE = re.compile(r"(?:@|/|\s)(?P<rate>\d{2,3}(?:\.\d{1,3})?)\s*(?:Hz|fps)\b", re.I)
+_FRAME_RATE_RE = re.compile(r"(?:@|/|:|\s)(?P<rate>\d{2,3}(?:\.\d{1,3})?)\s*(?:Hz|fps)\b", re.I)
 _DEPTH_RE = re.compile(r"\b(?P<depth>8|10|12|14|16)\s*(?:bit|bits|bpc)\b", re.I)
 _SAMPLE_RATE_RE = re.compile(r"(?P<rate>\d+(?:\.\d+)?)\s*(?P<unit>k?Hz)\b", re.I)
 _BIT_RATE_RE = re.compile(r"(?P<rate>\d+(?:\.\d+)?)\s*(?P<unit>[kKmM]?(?:bit|bps)(?:/s)?)\b")
